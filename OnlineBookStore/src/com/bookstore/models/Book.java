@@ -1,14 +1,14 @@
 package com.bookstore.models;
 
 public class Book {
-	private int id;
+	private String id;
 	private String title, author, publisher, category;
 	private double price;
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int isbn) {
-		this.id = isbn;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getTitle() {
 		return title;
