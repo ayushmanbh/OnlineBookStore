@@ -96,15 +96,15 @@ public class AdminDao {
 				                    	 Order o1 = new Order();
 				                    	 o1.setOrderid(res.getInt(1));
 				                    	 o1.setUserid(res.getInt(2));
-				                    	 o1.setOrderdate(res.getDate(3).toString());
-				                    	 o1.setTotalamount(res.getDouble(4));
-				                    	 o1.setStatus(res.getString(5));
+				                    	 o1.setOrderdate(res.getDate(4).toString());
+				                    	 o1.setTotalamount(res.getDouble(5));
+				                    	 o1.setStatus(res.getString(6));
 				                    	 orderDetails.add(o1);
 				                       }
 	
 			}catch(Exception e)
 			{
-				System.out.println(e);
+				e.printStackTrace();
 			}
 			return orderDetails;	
 	  }
