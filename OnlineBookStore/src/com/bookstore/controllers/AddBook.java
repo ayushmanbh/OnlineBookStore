@@ -42,6 +42,7 @@ public class AddBook extends HttpServlet {
 		String bpub = request.getParameter("bpub");
 		double bprice = Double.parseDouble(request.getParameter("bprice"));
 		String bcat = request.getParameter("bcat");
+		int bstock = Integer.parseInt(request.getParameter("bstock"));
 		
 		Book book = new Book();
 		book.setTitle(bname);
@@ -49,23 +50,30 @@ public class AddBook extends HttpServlet {
 		book.setPublisher(bpub);
 		book.setPrice(bprice);
 		book.setCategory(bcat);
+		book.setStock(bstock);
 		
-		AdminDao adminDao = new AdminDao();
-		int status = adminDao.addBook(book);
-		List<Book> books = adminDao.getAllBooks();
 		HttpSession session = request.getSession(false);
-		session.setAttribute("books", books);
-		if (status > 0) {
-			out.println("<script type=\"text/javascript\">");
-			   out.println("alert('Book added to database');");
-			   out.println("location='adminoffice.jsp';");
-			   out.println("</script>");
+		if(session == null){
+			out.print("<h3>Please login first</h3>");
+			out.print("<a href=\"static/html/index.html\">Home</a>");
 		}else {
-			out.println("<script type=\"text/javascript\">");
-			   out.println("alert('Some error occured. Book not added to database');");
-			   out.println("location='adminoffice.jsp';");
-			   out.println("</script>");
+			AdminDao adminDao = new AdminDao();
+			int status = adminDao.addBook(book);
+			List<Book> books = adminDao.getAllBooks();
+			
+			session.setAttribute("books", books);
+			if (status > 0) {
+				String msg = "Successfully added to database";
+				request.setAttribute("msg", msg);
+				request.getRequestDispatcher("adminoffice.jsp").include(request, response);
+			}else {
+				String msg = "Not added to database";
+				request.setAttribute("msg", msg);
+				request.getRequestDispatcher("adminoffice.jsp").include(request, response);
+			}
 		}
+		
+		
 		
 	}
 

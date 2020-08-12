@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bookstore.models.Book;
+import com.bookstore.models.Order;
+import com.bookstore.models.User;
 import com.bookstore.server.Server;
 import com.bookstore.services.AdminDao;
 
@@ -24,21 +26,37 @@ public class AdminLogin extends HttpServlet {
     }
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String uname = request.getParameter("uname");
-		String pass = request.getParameter("pass");
-		if (uname.equalsIgnoreCase("admin") && pass.equalsIgnoreCase("admin")) {
-			HttpSession session = request.getSession();
-			session.setAttribute("name", uname);
-						
-			AdminDao adminDao = new AdminDao();
-			List<Book> books = adminDao.getAllBooks();
-			request.setAttribute("books", books);
-			request.getRequestDispatcher("adminoffice.jsp").include(request, response);;
-		}else {
-			String err = "You are not admin.";
-			request.setAttribute("err", err);
-			request.getRequestDispatcher("error.jsp").include(request, response);
-		}
+		if(request.getParameter("uname") != null && request.getParameter("pass") != null) {
+			String uname = request.getParameter("uname");
+			String pass = request.getParameter("pass");
+			if (uname.equalsIgnoreCase("admin") && pass.equalsIgnoreCase("admin")) {
+				HttpSession session = request.getSession();
+				session.setAttribute("name", uname);
+							
+				AdminDao adminDao = new AdminDao();
+				List<Book> books = adminDao.getAllBooks();
+				List<User> users = adminDao.getAllUsers();
+				List<Order> orders = adminDao.getAllCompletedOrders();
+				session.setAttribute("books", books);
+				session.setAttribute("users", users);
+				session.setAttribute("orders", orders);
+				response.sendRedirect("adminoffice.jsp");
+//				request.getRequestDispatcher("adminoffice.jsp").include(request, response);
+			}else {
+				String err = "You are not admin.";
+				request.setAttribute("err", err);
+				request.getRequestDispatcher("error.jsp").include(request, response);
+			}
+		}else {			
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				request.getRequestDispatcher("adminoffice.jsp").include(request, response);
+			}else {
+				String err = "You are not admin.";
+				request.setAttribute("err", err);
+				request.getRequestDispatcher("error.jsp").include(request, response);
+			}	
+		}	
 	}
 
 }
