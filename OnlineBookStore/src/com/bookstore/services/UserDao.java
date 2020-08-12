@@ -75,5 +75,26 @@ public class UserDao {
 	        }
 	        return user;  
 	}
+	
+	public Book getBookByTitle(String title) {
+		Book book = null;
+		try
+		  {
+	            PreparedStatement ps = connection.prepareStatement("select * from books where title=?");
+	            ps.setString(1, title);
+	            ResultSet rs = ps.executeQuery();
+	            while (rs.next()) {
+					book = new Book();
+					book.setPrice(rs.getDouble("price"));
+					book.setStock(rs.getInt("stock"));
+				}
+
+	        }
+	        catch(Exception e) {
+	            e.printStackTrace();
+	        }
+	        return book;  
+	}
+
 
 }

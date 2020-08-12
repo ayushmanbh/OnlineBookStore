@@ -2,7 +2,7 @@ package com.bookstore.models;
 
 public class Order {
 	private int orderid, userid;
-	private String orderdate, status;
+	private String orderdate, status, title;
 	private double totalamount;
 	public int getOrderid() {
 		return orderid;
@@ -33,6 +33,12 @@ public class Order {
 	}
 	public void setTotalamount(double totalamount) {
 		this.totalamount = totalamount;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }
