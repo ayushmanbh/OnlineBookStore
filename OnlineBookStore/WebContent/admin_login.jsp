@@ -31,7 +31,9 @@
 				<label class="form-check-label" for="exampleCheck1">Check me
 					out</label>
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary">Login as admin</button>
+			
+			<a class="btn btn-primary" href="static/html/index.html">Home</a>
 		</form>
 	</div>
 

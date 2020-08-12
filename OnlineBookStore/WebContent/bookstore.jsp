@@ -6,8 +6,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Welcome to Online Book Store</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg=="
+	crossorigin="anonymous" />
 </head>
 <body>
+<div class="container">
 <div id="msg"></div>
 <%
 	if(session == null){
@@ -27,7 +32,7 @@
         ResultSet rs=st.executeQuery("select * from books where stock > 0");
     %>
     <form action="addtocart" method="post">
-    <table border=1>
+    <table class="table">
       <thead>
           <tr>
              <th>Title</th>
@@ -44,7 +49,7 @@
             %>
             <tr>
                 
-                <td><input type="checkbox" name="titles" value="<%=rs.getString("title") %>" /><%=rs.getString("title") %></td>
+                <td><span><input type="checkbox" name="titles" value="<%=rs.getString("title") %>" /></span> <%=rs.getString("title") %></td>
                 <td><%=rs.getString("author") %></td>
                 <td><%=rs.getString("publisher") %></td>
                 <td><%=rs.getString("category") %></td>
@@ -59,9 +64,10 @@
         out.print(e);%><br><%
     }
     %>
-    <input type="submit" value="Add to cart" />
-    <a href="cart">Show cart</a>
+    <input class="btn btn-primary" type="submit" value="Add to cart" />
+    <a class="btn btn-primary" href="cart">Show cart</a>
 </form>
+</div>
 
 
 <script>

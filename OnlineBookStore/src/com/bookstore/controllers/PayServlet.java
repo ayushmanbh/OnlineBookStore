@@ -1,6 +1,7 @@
 package com.bookstore.controllers;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,22 +15,33 @@ import com.bookstore.models.Order;
 import com.bookstore.server.Server;
 import com.bookstore.services.OrderDao;
 
-@WebServlet("/cart")
-public class CartServlet extends HttpServlet {
+@WebServlet("/pay")
+public class PayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public CartServlet() {
+    public PayServlet() {
         super();
-        OrderDao.connection =Server.getConnect();
+        OrderDao.connection = Server.getConnect();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
+		OrderDao orderDao = new OrderDao();
 		if (session != null) {
-			OrderDao orderDao = new OrderDao();
-			List<Order> userOrders = orderDao.getOrdersByUserid((Integer)session.getAttribute("userid"));
-			session.setAttribute("userOrders", userOrders);
-			response.sendRedirect("cart.jsp");
+			int status = 0;
+			List<Order> orders = (List<Order>)session.getAttribute("userOrders");
+			for (Order order : orders) {
+				status += orderDao.updateStatus(order.getOrderid());
+			}
+			if (status == orders.size()) {
+				String msg = "Thank you! Your order has been placed.";
+				request.setAttribute("msg", msg);
+				request.getRequestDispatcher("pay.jsp").include(request, response);
+			}else {
+				String msg = "Oops something went wrong.";
+				request.setAttribute("msg", msg);
+				request.getRequestDispatcher("pay.jsp").include(request, response);
+			}
 		}else {
 			String msg = "Please login first.";
 			request.setAttribute("msg", msg);
