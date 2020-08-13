@@ -108,5 +108,20 @@ public class AdminDao {
 			}
 			return orderDetails;	
 	  }
-
+	  
+	  
+	  public double revenue() {
+		  double revenue = 0;
+		  try {
+			PreparedStatement ps = connection.prepareStatement("select sum(totalamt) as revenue from orders where status = 'completed'");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				revenue = rs.getDouble("revenue");	
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		  return revenue;
+	  }
 }

@@ -40,6 +40,8 @@ public class AdminLogin extends HttpServlet {
 				session.setAttribute("books", books);
 				session.setAttribute("users", users);
 				session.setAttribute("orders", orders);
+				System.out.println(adminDao.revenue());
+				session.setAttribute("revenue", adminDao.revenue());
 				response.sendRedirect("adminoffice.jsp");
 //				request.getRequestDispatcher("adminoffice.jsp").include(request, response);
 			}else {

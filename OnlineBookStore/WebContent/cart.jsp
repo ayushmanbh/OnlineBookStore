@@ -26,6 +26,7 @@
 			%>
 			<h4><a href="logout.jsp">Logout</a></h4>
 	<%
+			out.print("<h3>Pending orders:</h3>");
 			out.print("<table class='table'>");
 			out.print("<tr><th>Order id</th><th>Book title</th><th>Order Date</th><th>Total Amount</th></tr>");
 			

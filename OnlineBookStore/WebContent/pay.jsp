@@ -13,6 +13,7 @@
 <body>
 <div class="container">
 	<p id="msg" class="lead"></p>
+	
 	<a href="bookstore" class="btn btn-primary">Continue Shopping...</a>
 
 </div>
@@ -21,10 +22,7 @@
 <script>
 
 	document.getElementById("msg").innerHTML = "<%= (request.getAttribute("msg") == null ? "" : request.getAttribute("msg").toString()) %>";
-	
-	setTimeout(function(){
-	    document.getElementById("msg").innerHTML = '';
-	}, 3000);
+
 </script>
 </body>
 </html>

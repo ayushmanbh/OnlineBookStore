@@ -27,7 +27,7 @@
 			out.print("<h1>Welcome " + n + "</h1>");
 			%>
 			<h4><a href="addbook.jsp">Add a new book</a> | <a href="logout.jsp">Logout</a></h4>
-			<h3>Total Books: ${books.size().toString()}</h3>
+			<h3>Total revenue: $${revenue.toString()}</h3>
 	<%
 			out.print("<table class='table'>");
 			out.print("<tr><th>Title</th><th>Author</th><th>Publisher</th><th>Price</th><th>Stock</th><th>Category</th></tr>");
