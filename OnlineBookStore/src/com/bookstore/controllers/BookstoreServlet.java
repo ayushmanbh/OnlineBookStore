@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bookstore.server.Server;
+import com.bookstore.services.OrderDao;
+
 /**
  * Servlet implementation class BookstoreServlet
  */
@@ -17,7 +20,6 @@ public class BookstoreServlet extends HttpServlet {
 
     public BookstoreServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

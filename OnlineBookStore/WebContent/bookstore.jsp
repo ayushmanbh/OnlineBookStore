@@ -21,7 +21,7 @@
 	}
 %>
 <h1>Welcome to Online Bootstore, <%=session.getAttribute("name").toString() %></h1>
-<h3><a href="logout.jsp">Logout</a></h3>
+<a class="btn btn-secondary mb-2" href="logout.jsp">Logout</a>
 <%
  try
     {
@@ -66,6 +66,7 @@
     %>
     <input class="btn btn-primary" type="submit" value="Add to cart" />
     <a class="btn btn-primary" href="cart">Show cart</a>
+    <a class="btn btn-primary" href="data.jsp">Download your Data</a>
 </form>
 </div>
 

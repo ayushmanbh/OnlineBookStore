@@ -24,7 +24,7 @@
 			String n = (String)session.getAttribute("name");
 			out.print("<h1>" + n + "'s cart</h1>");
 			%>
-			<h4><a href="logout.jsp">Logout</a></h4>
+			<a class="btn btn-secondary mb-2" href="logout.jsp">Logout</a>
 	<%
 			out.print("<h3>Pending orders:</h3>");
 			out.print("<table class='table'>");

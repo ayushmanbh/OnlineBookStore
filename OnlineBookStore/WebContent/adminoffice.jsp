@@ -26,7 +26,7 @@
 			String n = (String)session.getAttribute("name");
 			out.print("<h1>Welcome " + n + "</h1>");
 			%>
-			<h4><a href="addbook.jsp">Add a new book</a> | <a href="logout.jsp">Logout</a></h4>
+			<h4><a class="btn btn-primary" href="addbook.jsp">Add a new book</a> <a class="btn btn-secondary" href="logout.jsp">Logout</a></h4>
 			<h3>Total revenue: $${revenue.toString()}</h3>
 	<%
 			out.print("<table class='table'>");
